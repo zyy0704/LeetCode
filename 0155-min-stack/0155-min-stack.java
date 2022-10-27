@@ -1,37 +1,38 @@
 class MinStack {
-    Stack<Integer> stack;
-    List<Integer> list;
-
-    public MinStack() {
-        list = new ArrayList<>();
-        stack = new Stack<>();
+    
+    private class Node{
+        int val;
+        int min;
+        Node next;
         
+        private Node(int val, int min, Node next){
+            this.val = val;
+            this.min = min;
+            this.next = next;
+        }
     }
     
+    private Node head;
+    
     public void push(int val) {
-        // stack = new Stack<>();
-        // list.add(val);
-        // Collections.sort(list, Collections.reverseOrder());
-        // System.out.println(list.get(0));
-        // stack.addAll(list);
-        stack.push(val);
-        list.add(val);
+        if(head == null){
+            head = new Node(val,val,null);
+        } else{
+            head = new Node(val, Math.min(head.min, val), head);
+        }
     }
     
     public void pop() {
-        stack.pop();
-        list.remove(list.size() - 1);
+        head = head.next;
         
     }
     
     public int top() {
-        return list.get(list.size() - 1);
+        return head.val;
     }
     
     public int getMin() {
-        List<Integer> ordered = new ArrayList<>(list);
-        Collections.sort(ordered);
-        return ordered.get(0);
+        return head.min; 
     }
 }
 
