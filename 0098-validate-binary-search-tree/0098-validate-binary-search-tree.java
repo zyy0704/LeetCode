@@ -15,31 +15,30 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
+        
         if(root == null){
             return true;
         }
         
-        return helper(root.left,null,root.val) && helper(root.right, root.val, null);
+        return helper(root.left, null, root.val) && helper(root.right, root.val, null);
         
     }
     
     public boolean helper(TreeNode root, Integer lo, Integer hi){
+        
         if(root == null){
-            return true; 
-        }
-        if(lo != null){
-            if(root.val <= lo){
-                return false;
-            }
+            return true;
         }
         
-        if(hi != null){
-            if(root.val >= hi){
-                return false;
-            }
-        }
-       
-        return helper(root.left, lo,root.val) && helper(root.right, root.val, hi);
+       if(lo != null && root.val <= lo){
+           return false;
+       }
         
+        if(hi != null && root.val >= hi){
+            return false;
+        }
+        
+        return helper(root.left, lo, root.val) && helper(root.right,root.val,hi);
+           
     }
 }
