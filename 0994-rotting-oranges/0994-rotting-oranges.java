@@ -1,6 +1,4 @@
 class Solution {
-    List<int[]> rotten = new ArrayList<>();
-    int fresh = 0;
     public int orangesRotting(int[][] grid) {
         
         for(int i = 0; i < grid.length; i++){
@@ -29,11 +27,11 @@ class Solution {
     
     private void floodFill(int[][] grid, int x, int y, int mins){
         
-        if(x < 0 || x >= grid.length || y < 0 || y >= grid[0].length || grid[x][y] == 0 || (1 < grid[x][y] && grid[x][y] < mins)){
+        if(x < 0 || x >= grid.length || y < 0 || y >= grid[0].length || grid[x][y] == 0 ||
+           (grid[x][y] > 1 && grid[x][y] < mins)){
             return;
         }else {
             grid[x][y] = mins;
-            fresh--;
             
             if(x < grid.length ){
             floodFill(grid, x + 1, y , mins + 1);
