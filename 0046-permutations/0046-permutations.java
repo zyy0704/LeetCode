@@ -3,27 +3,26 @@ class Solution {
         
         List<List<Integer>> sol = new ArrayList<>();
         
-        backtrace(nums, new ArrayList<>(), sol);
+        List<Integer> list = new ArrayList<>();
+        backtrack(sol, nums, list);
+        
         return sol;
         
     }
     
-    public void backtrace(int[] nums, List<Integer> arr, List<List<Integer>> sol){
-        
-        if(arr.size() == nums.length){
-            sol.add(new ArrayList<>(arr));
-        }else{
+    public void backtrack(List<List<Integer>> sol, int[] nums, List<Integer> list){
+        if(list.size() == nums.length){
+                sol.add(new ArrayList<>(list));
+            }else{
         
         for(int i = 0; i < nums.length; i++){
+            if(!list.contains(nums[i])){
+            list.add(nums[i]);
+            backtrack(sol, nums, list);
+            list.remove(list.size() - 1);
             
-            if(!arr.contains(nums[i])){
-            arr.add(nums[i]);
-            
-            backtrace(nums, arr, sol);
-            arr.remove(arr.size() - 1);
         }
-            }
         }
-        
+        }
     }
 }
